@@ -21,106 +21,139 @@ The project follows clean architecture principles and is suitable for real-world
 
 ---
 
-## 🧩 Core Modules
+## 🧩 Core Modules & API Routes
 
-### 🔐 Authentication & Authorization
-- Admin login and logout
-- User registration and authentication
-- Token-based security
-- Middleware protection for admin-only routes
-
----
-
-### 👥 User Management
-- Create and manage users
-- Update user information
-- Soft delete and restore users
-- View active and trashed users
+### 🔐 Authentication
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/login1` | Admin login |
+| POST   | `/logout1` | Admin logout |
+| POST   | `/register1` | Register new admin |
+| POST   | `/register_user` | Register new user |
 
 ---
 
-### 🧑‍💼 Customer Management
-- Add and manage customers
-- Update customer profiles
-- Soft delete and restore customers
-- Search customers
+### 👥 Users Management
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_user` | Add new user |
+| PUT    | `/update_user/{user}` | Update user info |
+| DELETE | `/delete_user/{user}` | Soft delete user |
+| GET    | `/trashed_user` | List soft deleted users |
+| GET    | `/back_from_soft_delete/{user}` | Restore deleted user |
+| GET    | `/get_all_users` | List all users |
+| GET    | `/view_user/{userId}` | View user details |
+
+---
+
+### 🧑‍💼 Customers
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_customer` | Add customer |
+| PUT    | `/update_customer/{customer}` | Update customer info |
+| DELETE | `/delete_customer/{customer}` | Soft delete customer |
+| GET    | `/trashed_customer` | View trashed customers |
+| GET    | `/back_from_soft_delete/{customer}` | Restore customer |
+| GET    | `/get_all_customers` | List all customers |
+| GET    | `/get_customer_id/{id}` | Get customer by ID |
+| GET    | `/search` | Search customers |
 
 ---
 
 ### 🗂️ Categories & Departments
-- Create and delete categories
-- Manage departments
-- Assign products to departments
-- Update and remove departments
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_cat` | Add category |
+| DELETE | `/delete_cat/{id}` | Delete category |
+| POST   | `/add_department` | Add department |
+| GET    | `/get_all_departments` | List all departments |
+| GET    | `/get_department_id/{department}` | View department |
+| PUT    | `/update_department/{department}` | Update department |
+| DELETE | `/delete_department/{department}` | Delete department |
 
 ---
 
-### 📦 Product Management
-- Add new products
-- Update product details
-- Delete products
-- View product lists and product details
-- Associate customers with product publications
+### 📦 Products
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_product` | Add product |
+| GET    | `/get_all_products` | List all products |
+| GET    | `/get_product_id/{id}` | Get product details |
+| PUT    | `/update_product/{product}` | Update product |
+| DELETE | `/delete_product/{product}` | Delete product |
+| POST   | `/add_customer_for_publication` | Associate customer with product publication |
 
 ---
 
-### 🧾 Orders Management
-- Create new orders
-- View all orders
-- Delete orders
+### 🧾 Orders
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_order` | Create order |
+| GET    | `/get_all_orders` | List all orders |
+| DELETE | `/delete_order/{order}` | Delete order |
+| GET    | `/ListOrder` | View order list |
+| GET    | `/viewOrder` | View order details |
+| GET    | `/dd/{orderId}` | Additional order details |
 
 ---
 
-### 🚚 Shipment Management
-- Create shipments
-- Update shipment details
-- Track shipment status
-- Apply discounts and time-based offers
-- Soft delete and restore shipments
+### 🚚 Shipments
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_shippment` | Create shipment |
+| GET    | `/get_all_shippments` | List shipments |
+| PUT    | `/update_Shipement/{shippment}` | Update shipment |
+| GET    | `/discounted/{id}` | Apply discount |
+| GET    | `/discounted_period_time/{id}` | Discount within period |
+| DELETE | `/delete_shippment/{shippment}` | Soft delete shipment |
+| GET    | `/trashed_Shipement` | View trashed shipments |
+| GET    | `/back_from_soft_delete/{shipment}` | Restore shipment |
 
 ---
 
-### 📄 Pages & Sales Tracking
-- Create sales pages
-- Track sold products
-- Count sold products per page
-- Update and delete pages
+### 📄 Pages
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_page` | Add sales page |
+| GET    | `/get_all_pages` | List pages |
+| GET    | `/get_page_id/{id}` | View page details |
+| PUT    | `/update_page/{page}` | Update page |
+| DELETE | `/delete_page/{page}` | Delete page |
+| GET    | `/saled_product/{id}` | Track sold products |
+| GET    | `/count_product/{id}` | Count products sold per page |
 
 ---
 
-### 🗃️ Records Management
-- Add operational records
-- Update records
-- Soft delete and restore records
-- View department-related records
+### 🗃️ Records
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_record` | Add record |
+| PUT    | `/update_record/{record}` | Update record |
+| DELETE | `/delete_recorcd/{record}` | Soft delete record |
+| GET    | `/trashed_customer` | View trashed records |
+| GET    | `/back_from_soft_delete/{record}` | Restore record |
+| GET    | `/get_all_departments` | List department-related records |
 
 ---
 
 ### ✉️ Invitations
-- Send invitations
-- View all invitations
-- View invitation details
-- Delete invitations
+| Method | Endpoint | Description |
+|--------|---------|-------------|
+| POST   | `/add_invtation` | Add invitation |
+| GET    | `/get_all_invtations` | List invitations |
+| GET    | `/get_invtation/{id}` | View invitation details |
+| DELETE | `/delete_invitation/{id}` | Delete invitation |
 
 ---
 
 ## 🛠️ Tech Stack
 
-- **Backend:** Laravel (PHP)
-- **API Style:** RESTful APIs
-- **Authentication:** Token-based + Middleware
-- **Database:** MySQL
-- **Architecture:** MVC Pattern
-- **Security:** Role-based access control
-
----
-
-## 📂 Project Structure
-
-- Controllers for each module (Users, Products, Orders, Shipments, etc.)
-- API routes organized by functionality
-- Middleware for admin authorization
-- Soft delete support for critical entities
+- **Backend:** Laravel (PHP)  
+- **Database:** MySQL  
+- **API Style:** RESTful APIs  
+- **Authentication:** Token-based + Middleware  
+- **Architecture:** MVC Pattern  
+- **Security:** Role-based access control  
 
 ---
 
@@ -129,20 +162,3 @@ The project follows clean architecture principles and is suitable for real-world
 1. Clone the repository:
  ```bash
    git clone https://github.com/Eng-Maya/sales-management-system.git
-```
----
-### Install dependencies:
-```bash
- composer install
-```
----
-### Run migrations:
-```bash
-php artisan migrate
-```
----
-### Start the server:
-```bash
-php artisan serve
-```
----
